@@ -180,8 +180,8 @@ const Menu = () => {
               </div>
               <div className="flex flex-col items-center lg:items-end">
                 <Image
-                  src="/Menuimg2.png"
-                  alt=""
+                  src="/menuimg2.png"
+                  alt="mainCourse"
                   width={300}
                   height={300}
                   className="mb-4  md:items-center"
