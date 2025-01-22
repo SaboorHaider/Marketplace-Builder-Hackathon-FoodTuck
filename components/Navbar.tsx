@@ -56,7 +56,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            href="/Menu"
+            href="/FAQ"
             className="hover:text-yellow-500 text-white transform transition duration-100 hover:scale-105 cursor-pointer"
           >
             Pages
@@ -69,9 +69,6 @@ const Navbar = () => {
             About
           </Link>
 
-
-        
-         
           <Link
             href="/Shop"
             className="hover:text-yellow-500 text-white transform transition duration-100 hover:scale-105 cursor-pointer"
@@ -84,6 +81,7 @@ const Navbar = () => {
           >
             Contact
           </Link>
+      
         </div>
 
         <div className="flex items-center mt-4 md:mt-0">
@@ -111,7 +109,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            href="/Menu"
+            href="/menu"
             className="block text-white py-2"
             onClick={toggleMenu}
           >

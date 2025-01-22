@@ -1,171 +1,209 @@
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import Header from '../../components/Header';
-import { MdKeyboardArrowRight } from 'react-icons/md';
-import Footer from '../../components/Footer';
+"use client";
+import Header from "../../components/Header";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+
+interface CartItem {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
+
+const countries = [
+  "Australia",
+  "Canada",
+  "India",
+  "Pakistan",
+  "United Kingdom",
+  "United States",
+  "Germany",
+  "France",
+  "Italy",
+  "Spain",
+];
 
 
-const CheckoutPage = () => {
+export default function CheckoutPage() {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [userDetails, setUserDetails] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    company: "",
+    country: "",
+    city: "",
+    zipCode: "",
+    address1: "",
+    address2: "",
+  });
+  const [showPopup, setShowPopup] = useState(false);
+  const [generatedUserId, setGeneratedUserId] = useState("");
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCartItems(storedCart);
+  }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setUserDetails({ ...userDetails, [e.target.id]: e.target.value });
+  };
+
+  const calculateTotal = () => {
+    return cartItems
+      .reduce((acc, item) => acc + item.price * item.quantity, 0)
+      .toFixed(2);
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    // Generate User ID
+    const userId = `USER-${Math.floor(1000 + Math.random() * 9000)}`;
+    setGeneratedUserId(userId);
+
+    const formData = {
+      userId,
+      fullName: `${userDetails.firstName} ${userDetails.lastName}`,
+      email: userDetails.email,
+      phone: userDetails.phone,
+      company: userDetails.company,
+      address: `${userDetails.address1}, ${userDetails.address2}, ${userDetails.city}, ${userDetails.zipCode}, ${userDetails.country}`,
+      orderTotal: calculateTotal(),
+      cartItems: cartItems
+        .map(
+          (item) =>
+            `${item.title} (Qty: ${item.quantity}, Price: $${(
+              item.price * item.quantity
+            ).toFixed(2)})`
+        )
+        .join("\n"),
+      orderStatus: "Order Confirmed",
+    };
+
+    console.log("Order Details:", formData);
+    setShowPopup(true);
+  };
+
   return (
-
-    <div className='bg-white' >
-
-<header>
-        <Header />
-
-        <div className="relative">
-          <Image
-            src="/mainbg.jpg"
-            alt="Header Background"
-            width={900}
-            height={900}
-            className="w-full h-[200px] object-cover "
-          />
-
-          <div className="absolute inset-0 lg:m-[70px] justify-center  text-center items-center gap-[15px] sm:gap-[20px] lg:gap-[30px] px-4 text-white">
-            <h2 className="text-center text-3xl font-bold ">Cheekout Page</h2>
-
-            <div className=" text-center justify-center items-center flex mt-1 ">
-              <p>
-                <Link href="/" className="cursor-pointer hover:text-yellow-200">
-                  Home
-                </Link>
-              </p>
-              <MdKeyboardArrowRight />
-
-              <p className="text-[#FF9F0D] cursor-pointer">
-                <Link href="/Error404">Cheekout</Link>
-              </p>
+    <div>
+      <div className="grid gap-8 lg:grid-cols-2 bg-white container py-8 lg:px-[180px] lg:mx-[40px] px-9 my-[50px]">
+        {/* Shipping Form */}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <h2 className="text-xl font-semibold mb-4">Shipping Address</h2>
+          <div className="grid gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <InputField label="First Name" id="firstName" value={userDetails.firstName} handleChange={handleInputChange} />
+              <InputField label="Last Name" id="lastName" value={userDetails.lastName} handleChange={handleInputChange} />
             </div>
-          </div>
-        </div>
-      </header>
-
-    <div className="container mx-auto p-4 mt-10"  >
-      <div className="flex flex-col lg:flex-row justify-between">
-
-
-        {/* Shipping Address Form */}
-        <div className="w-full lg:w-2/3 bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold mb-6">Shipping Address</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">First name</label>
-              <input className="mt-1 block w-full border border-gray-300 rounded-md p-2" type="text" />
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <InputField label="Email" id="email" type="email" value={userDetails.email} handleChange={handleInputChange} />
+              <InputField label="Phone" id="phone" type="tel" value={userDetails.phone} handleChange={handleInputChange} />
             </div>
+            <InputField label="Company" id="company" value={userDetails.company} handleChange={handleInputChange} />
+            
+            {/* Country Dropdown */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">Last name</label>
-              <input className="mt-1 block w-full border border-gray-300 rounded-md p-2" type="text" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Email address</label>
-              <input className="mt-1 block w-full border border-gray-300 rounded-md p-2" type="email" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Phone number</label>
-              <input className="mt-1 block w-full border border-gray-300 rounded-md p-2" type="text" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Company</label>
-              <input className="mt-1 block w-full border border-gray-300 rounded-md p-2" type="text" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Country</label>
-              <select className="mt-1 block w-full border border-gray-300 rounded-md p-2">
-                <option>Choose country</option>
+              <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">Country</label>
+              <select
+                id="country"
+                name="country"
+                value={userDetails.country}
+                onChange={handleInputChange}
+                className="lg:w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-orange-500"
+              >
+                {countries.map((country, index) => (
+                  <option key={index} value={country}>{country}</option>
+                ))}
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">City</label>
-              <select className="mt-1 block w-full border border-gray-300 rounded-md p-2">
-                <option>Choose city</option>
-              </select>
+
+            <InputField label="City" id="city" value={userDetails.city} handleChange={handleInputChange} />
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <InputField label="Zip Code" id="zipCode" value={userDetails.zipCode} handleChange={handleInputChange} />
+              <InputField label="Address 1" id="address1" value={userDetails.address1} handleChange={handleInputChange} />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Zip code</label>
-              <input className="mt-1 block w-full border border-gray-300 rounded-md p-2" type="text" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Address 1</label>
-              <input className="mt-1 block w-full border border-gray-300 rounded-md p-2" type="text" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Address 2</label>
-              <input className="mt-1 block w-full border border-gray-300 rounded-md p-2" type="text" />
-            </div>
+            <InputField label="Address 2" id="address2" value={userDetails.address2} handleChange={handleInputChange} />
           </div>
-          <div className="mt-6">
-            <h2 className="text-2xl font-semibold mb-2">Billing Address</h2>
-            <div className="flex items-center mb-4">
-              <input className="h-4 w-4 text-orange-600 border-gray-300 rounded" type="checkbox" />
-              <label className="ml-2 block text-sm font-medium text-gray-700">Same as shipping address</label>
-            </div>
-            <div className="flex justify-between">
-             <Link href='/AddCart'>
-             <button className="flex items-center text-orange-600 border border-orange-600 hover:bg-orange-500 hover:text-white rounded-md px-4 py-2">
-                <i className="fas fa-arrow-left mr-2" />
-                Back to cart
-              </button></Link>
-              <Link href='/Error404'>
-              <button className="bg-orange-600 text-white rounded-md px-4 py-2">
-                Proceed to shipping
-                <i className="fas fa-arrow-right ml-2" />
-              </button></Link>
-            </div>
-          </div>
-        </div>
+          <button
+            type="submit"
+            className="px-6 py-2 bg-orange-500 text-white rounded-md shadow-sm hover:bg-orange-600 focus:outline-none"
+          >
+            Submit
+          </button>
+        </form>
 
         {/* Order Summary */}
-        <div className="w-full lg:w-1/3 bg-white p-8 rounded-lg shadow-md mt-8 lg:mt-0">
-          <h2 className="text-2xl font-semibold mb-6">Order Summary</h2>
+        <div className="p-6 rounded-lg border-2 border-gray-300 mx-[40px] h-[520px]">
+          <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
           <div className="space-y-4">
-            {[...Array(3)].map((_, index) => (
-              <div key={index} className="flex items-center">
-                <Image alt="Chicken Tikka Kabab" height={900} width={900} className="w-16 h-16 rounded-md" src="/checkoutimg.jpg" />
-                <div className="ml-4">
-                  <h3 className="text-lg font-semibold">Chicken Tikka Kabab</h3>
-                  <p className="text-sm text-gray-500">150 gm net</p>
-                  <p className="text-sm text-gray-500">50$</p>
+            {cartItems.map((item) => (
+              <div key={item.id} className="flex items-center space-x-4">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={64}
+                  height={64}
+                  className="rounded-md object-cover"
+                />
+                <div className="flex-1">
+                  <h3 className="font-medium">{item.title}</h3>
+                  <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
+                  <p className="text-sm text-gray-500">Price: ${(item.price * item.quantity).toFixed(2)}</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="mt-6 border-t border-gray-200 pt-4">
-            <div className="flex justify-between text-sm font-medium text-gray-700">
-              <span>Sub-total</span>
-              <span>130$</span>
+          <div className="mt-6 space-y-2 border-t pt-4">
+            <div className="flex justify-between text-sm">
+              <span>Subtotal</span>
+              <span>${calculateTotal()}</span>
             </div>
-            <div className="flex justify-between text-sm font-medium text-gray-700">
-              <span>Shipping</span>
-              <span>Free</span>
+            <div className="flex justify-between border-t pt-2">
+              <span className="font-semibold">Total</span>
+              <span className="font-semibold">${calculateTotal()}</span>
             </div>
-            <div className="flex justify-between text-sm font-medium text-gray-700">
-              <span>Discount</span>
-              <span>26%</span>
-            </div>
-            <div className="flex justify-between text-sm font-medium text-gray-700">
-              <span>Tax</span>
-              <span>54.76$</span>
-            </div>
-            <div className="flex justify-between text-lg font-semibold text-gray-900 mt-4">
-              <span>Total</span>
-              <span>432.65$</span>
-            </div>
-            <button className="w-full bg-orange-600   text-white rounded-md px-4 py-2 mt-6">
-              Place an order
-              <i className="fas fa-arrow-right ml-2" />
-            </button>
           </div>
         </div>
       </div>
-      </div>
 
-      <footer>
-        <Footer/>
-      </footer>
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <h2 className="text-lg font-semibold mb-4">Order Details</h2>
+            <p><strong>User ID:</strong> {generatedUserId}</p>
+            <p><strong>Full Name:</strong> {userDetails.firstName} {userDetails.lastName}</p>
+            <p><strong>Email:</strong> {userDetails.email}</p>
+            <p><strong>Order Total:</strong> ${calculateTotal()}</p>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-md shadow-sm hover:bg-orange-600"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
-};
+}
 
-export default CheckoutPage;
+function InputField({ label, id, type = "text", value, handleChange }: any) {
+  return (
+    <div>
+      <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">
+        {label}
+      </label>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        value={value}
+        onChange={handleChange}
+        className="lg:w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-orange-500"
+      />
+    </div>
+  );
+}
