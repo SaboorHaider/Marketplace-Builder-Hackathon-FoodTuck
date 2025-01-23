@@ -5,6 +5,12 @@ import { FaSearch } from "react-icons/fa";
 import { FaShoppingBag } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../components/ui/accordion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,12 +61,6 @@ const Navbar = () => {
             Blog
           </Link>
 
-          <Link
-            href="/FAQ"
-            className="hover:text-yellow-500 text-white transform transition duration-100 hover:scale-105 cursor-pointer"
-          >
-            Pages
-          </Link>
 
           <Link
             href="/About"
@@ -76,12 +76,55 @@ const Navbar = () => {
             Shop
           </Link>
           <Link
-            href="/Contact"
+            href="/Error404"
             className="hover:text-yellow-500 text-white transform transition duration-100 hover:scale-105 cursor-pointer"
           >
             Contact
           </Link>
-      
+
+          <div className="text-white">
+              <Accordion
+                type="single"
+                collapsible
+                className="w-full border-none"
+              >
+                <AccordionItem value="items">
+                  <AccordionTrigger className="hover:text-[#FF9F0D] hover:underline text-white transform transition duration-100 hover:scale-105 cursor-pointer ">
+                    Page
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <ul>
+                      <li className="">
+                        <Link
+                          href="/ChefGallery"
+                          className="hover:text-yellow-500  text-white transform transition cursor-pointer"
+                        >
+                          Chef Gallery
+                        </Link>
+                      </li>
+         
+                      <li className="">
+                        <Link
+                          href="/FAQ"
+                          className="hover:text-yellow-500  text-white transform transition cursor-pointer"
+                        >
+                          FAQ
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          href="/SignUp"
+                          className="hover:text-yellow-500  text-white transform transition cursor-pointer"
+                        >
+                          SignUp
+                        </Link>
+                      </li>
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+
         </div>
 
         <div className="flex items-center mt-4 md:mt-0">
@@ -109,7 +152,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            href="/menu"
+            href="/Menu"
             className="block text-white py-2"
             onClick={toggleMenu}
           >
@@ -135,6 +178,52 @@ const Navbar = () => {
           </Link>
 
 
+    
+          <div className="text-white mt-1">
+             
+              <Accordion
+                type="single"
+                collapsible
+                className="w-full border-none"
+              >
+                <AccordionItem value="items">
+                  <AccordionTrigger className="hover:text-[#FF9F0D] hover:underline text-white transform transition duration-100 hover:scale-105 cursor-pointer ">
+                    Page
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <ul className=" w-full text-center mt-3 grid grid-cols-3 ">
+                      <li className="">
+                        <Link
+                          href="/ChefGallery"
+                          className="hover:text-yellow-500  text-white transform transition cursor-pointer"
+                        >
+                          Chef Gallery
+                        </Link>
+                      </li>
+         
+                      <li className="">
+                        <Link
+                          href="/FAQ"
+                          className="hover:text-yellow-500  text-white transform transition cursor-pointer"
+                        >
+                          FAQ
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          href="/SignUp"
+                          className="hover:text-yellow-500  text-white transform transition cursor-pointer"
+                        >
+                          SignUp
+                        </Link>
+                      </li>
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>         
+
+
 
           <Link
             href="/Blog"
@@ -144,15 +233,9 @@ const Navbar = () => {
             Blog
           </Link>
 
-          
-          <Link
-            href="/Contact"
-            className="block text-white py-2"
-            onClick={toggleMenu}
-          >
-            Contact
-          </Link>
+      
 
+     
 
 
 

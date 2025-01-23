@@ -66,6 +66,22 @@ const Header = () => {
                         </Link>
                       </li>
          
+                      <li className="">
+                        <Link
+                          href="/FAQ"
+                          className="hover:text-yellow-500  text-white transform transition cursor-pointer"
+                        >
+                          FAQ
+                        </Link>
+                      </li>
+                      <li className="">
+                        <Link
+                          href="/SignUp"
+                          className="hover:text-yellow-500  text-white transform transition cursor-pointer"
+                        >
+                          SignUp
+                        </Link>
+                      </li>
                     </ul>
                   </AccordionContent>
                 </AccordionItem>

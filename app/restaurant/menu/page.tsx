@@ -20,7 +20,7 @@ const MenuCom = () => {
         <h1 className="text-3xl font-bold text-center mb-8"><span className="text-[#FF9F0D]">Fr</span>om Our Menu</h1>
 
         <div className="flex justify-center mb-8">
-          <ul className="flex flex-wrap justify-evenly space-x-2 sm:space-x-4 ">
+          <ul className="flex flex-wrap justify-evenly space-x-2 sm:space-x-2 ">
             <li className="cursor-pointer hover:text-[#FF9F0D]  transform transition hover:scale-105">Breakfast</li>
             <li className="cursor-pointer hover:text-[#FF9F0D]  transform transition hover:scale-105">Lunch</li>
             <li className="cursor-pointer hover:text-[#FF9F0D]  transform transition hover:scale-105">Dinner</li>
