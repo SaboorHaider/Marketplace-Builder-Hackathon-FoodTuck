@@ -3,13 +3,19 @@ import { useState } from "react";
 import { FaSearch, FaUser, FaBars, FaTimes, FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";
 
+// Type for navItems
+interface NavItem {
+  name: string;
+  path: string;
+}
+
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { name: "Home", path: "/" },
     { name: "Our Menu", path: "/ourmenu" },
     { name: "About Us", path: "/aboutus" },
