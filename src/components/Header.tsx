@@ -1,7 +1,8 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { FaSearch, FaUser, FaBars, FaTimes, FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,28 +57,35 @@ const Header = () => {
         </div>
       </div>
 
-      {isOpen && (
-        <div className="md:hidden bg-black py-4 grid grid-cols-1 gap-4 text-center">
-          <Link href="/" className="text-white hover:text-[#FF9F0D] transition duration-200" onClick={() => setIsOpen(false)}>
-            Home
-          </Link>
-          <Link href="/ourmenu" className="text-white hover:text-[#FF9F0D] transition duration-200" onClick={() => setIsOpen(false)}>
-            Our Menu
-          </Link>
-          <Link href="/aboutus" className="text-white hover:text-[#FF9F0D] transition duration-200" onClick={() => setIsOpen(false)}>
-            About Us
-          </Link>
-          <Link href="/shop" className="text-white hover:text-[#FF9F0D] transition duration-200" onClick={() => setIsOpen(false)}>
-            Shop
-          </Link>
-          <Link href="/ourchef" className="text-white hover:text-[#FF9F0D] transition duration-200" onClick={() => setIsOpen(false)}>
-            Our Chef
-          </Link>
-          <Link href="/faq" className="text-white hover:text-[#FF9F0D] transition duration-200" onClick={() => setIsOpen(false)}>
-            Faq
-          </Link>
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-black py-4 grid grid-cols-1 gap-4 text-center"
+          >
+            {[
+              { href: "/", label: "Home" },
+              { href: "/ourmenu", label: "Our Menu" },
+              { href: "/aboutus", label: "About Us" },
+              { href: "/shop", label: "Shop" },
+              { href: "/ourchef", label: "Our Chef" },
+              { href: "/faq", label: "Faq" },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-white hover:text-[#FF9F0D] transition duration-200"
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
