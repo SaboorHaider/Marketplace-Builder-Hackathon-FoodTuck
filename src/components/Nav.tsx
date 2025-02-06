@@ -19,7 +19,7 @@ const Navbar = () => {
         <span className="text-[#FF9F0D] font-bold text-[24px] flex-grow text-center">
           Food<span className="text-white">tuck</span>
         </span>
-        <div className="md:hidden ">
+        <div className="md:hidden">
           <button onClick={toggleMenu} aria-label="Toggle menu">
             {isOpen ? (
               <FaTimes className="text-white" />
@@ -55,7 +55,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            href="/aboutus  "
+            href="/aboutus"
             className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer"
           >
             About
@@ -69,7 +69,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            href="/FAQ"
+            href="/faq"
             className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer"
           >
             FAQ
@@ -83,7 +83,7 @@ const Navbar = () => {
               placeholder="Search..."
               className="pl-4 pr-10 py-2 rounded-full bg-black border border-[#FF9F0D] text-white focus:outline-none"
             />
-            <Link href="/Error404">
+            <Link href="/search">
               <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white" />
             </Link>
           </div>
@@ -96,8 +96,8 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       <div
         className={`md:hidden w-full text-center mt-3 grid grid-cols-3 transition-all duration-300 ease-in-out transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+          isOpen ? "translate-x-0" : "translate-x-full"
+        } z-50`} // Added z-index to ensure it's above other elements
       >
         <Link href="/" className="block text-white py-2" onClick={toggleMenu}>
           Home
