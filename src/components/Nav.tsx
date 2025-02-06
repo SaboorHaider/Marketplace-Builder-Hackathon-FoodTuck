@@ -104,7 +104,7 @@ const Navbar = () => {
         </Link>
 
         <Link
-          href="/menu"
+          href="/ourmenu"
           className="block text-white py-2"
           onClick={toggleMenu}
         >
