@@ -1,24 +1,13 @@
 "use client";
 import { useState } from "react";
-import {
-  FaSearch,
-  FaUser,
-  FaBars,
-  FaTimes,
-  FaShoppingCart,
-} from "react-icons/fa";
+import { FaSearch, FaUser, FaBars, FaTimes, FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -32,9 +21,8 @@ const Header = () => {
     <header className="bg-black text-white">
       <div className="flex justify-between items-center px-6 py-4 md:px-10">
         <div className="font-bold text-xl">
-          <Link href="/">
-            <span className="text-white">Food</span>
-            <span className="text-[#FF9F0D]">tuck</span>
+          <Link href="/" className="text-white">
+            Food<span className="text-[#FF9F0D]">tuck</span>
           </Link>
         </div>
 
@@ -43,7 +31,7 @@ const Header = () => {
             <Link
               key={item.path}
               href={item.path}
-              className="hover:text-[#FF9F0D] hover:underline transform transition duration-200 ease-in-out hover:scale-105 cursor-pointer"
+              className="hover:text-[#FF9F0D] hover:underline transition duration-200 hover:scale-105"
             >
               {item.name}
             </Link>
@@ -55,53 +43,45 @@ const Header = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="pl-4 pr-10 py-2 rounded-full bg-black border border-[#FF9F0D] text-white focus:outline-none transition duration-200 ease-in-out focus:ring-2 focus:ring-[#FF9F0D]"
+              className="pl-4 pr-10 py-2 rounded-full bg-black border border-[#FF9F0D] text-white focus:outline-none focus:ring-2 focus:ring-[#FF9F0D]"
             />
-            <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white cursor-pointer" />
+            <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" />
           </div>
           <Link href="/shoppingcart">
-            <FaShoppingCart className="cursor-pointer hover:text-[#FF9F0D] transition duration-200 ease-in-out" />
+            <FaShoppingCart className="cursor-pointer hover:text-[#FF9F0D]" />
           </Link>
           <Link href="/user">
-            <FaUser className="cursor-pointer hover:text-[#FF9F0D] transition duration-200 ease-in-out" />
+            <FaUser className="cursor-pointer hover:text-[#FF9F0D]" />
           </Link>
-          <button
-            onClick={toggleMenu}
-            className="md:hidden focus:outline-none transition duration-200 ease-in-out"
-          >
-            {isOpen ? (
-              <FaTimes className="text-xl" />
-            ) : (
-              <FaBars className="text-xl" />
-            )}
+          <button onClick={toggleMenu} className="md:hidden focus:outline-none">
+            {isOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
           </button>
         </div>
       </div>
 
-      <div
-        className={`md:hidden bg-black py-4 grid grid-cols-3 gap-4 place-items-center transition-all duration-300 ease-in-out transform ${isOpen ? "scale-y-100" : "scale-y-0 overflow-hidden"}`}
-      >
-        {navItems.map((item) => (
+      {isOpen && (
+        <div className="md:hidden bg-black py-4 grid grid-cols-1 gap-4 text-center">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              href={item.path}
+              className="text-white hover:text-[#FF9F0D] transition duration-200"
+              onClick={closeMenu}
+            >
+              {item.name}
+            </Link>
+          ))}
           <Link
-            key={item.path}
-            href={item.path}
-            className="text-white hover:text-[#FF9F0D] transition duration-200 ease-in-out"
+            href="/faq"
+            className="text-white hover:text-[#FF9F0D] transition duration-200"
             onClick={closeMenu}
           >
-            {item.name}
+            FAQ
           </Link>
-        ))}
-        <Link
-          href="/faq"
-          className="text-white hover:text-[#FF9F0D] transition duration-200 ease-in-out"
-          onClick={closeMenu}
-        >
-          FAQ
-        </Link>
-      </div>
+        </div>
+      )}
     </header>
   );
 };
-
 
 export default Header;
