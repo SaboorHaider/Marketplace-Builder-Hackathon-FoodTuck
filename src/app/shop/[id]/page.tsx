@@ -40,28 +40,38 @@ const WishlistButton = () => {
 const Page = ({ params }: { params: { id: string } }) => {
   const [datas, setDatas] = useState<any>(null);
   const [relatedImages, setRelatedImages] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedData = await client.fetch(
-        `*[_type == "food" && _id == "${params.id}"][0]{
-          name, category, price, originalPrice, image, description, available, tags
-        }`
-      );
-      setDatas(fetchedData);
-
-      if (fetchedData?.tags?.[0]) {
-        const images = await client.fetch(
-          `*[_type == "food" && "${fetchedData.tags[0]}" in tags][0...3]{ "url": image.asset->url }`
+      try {
+        setLoading(true);
+        const fetchedData = await client.fetch(
+          `*[_type == "food" && _id == "${params.id}"][0]{
+            name, category, price, originalPrice, image, description, available, tags
+          }`
         );
-        setRelatedImages(images);
+        setDatas(fetchedData);
+
+        if (fetchedData?.tags?.[0]) {
+          const images = await client.fetch(
+            `*[_type == "food" && "${fetchedData.tags[0]}" in tags][0...3]{ "url": image.asset->url }`
+          );
+          setRelatedImages(images);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, [params.id]);
 
-  if (!datas) return <p className="text-center py-10">Loading...</p>;
+  if (loading) return <p className="text-center py-10">Loading...</p>;
+
+  if (!datas) return <p className="text-center py-10">Product not found.</p>;
 
   return (
     <div>
