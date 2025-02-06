@@ -1,106 +1,150 @@
 "use client";
 import { useState } from "react";
-import {
-  FaSearch,
-  FaUser,
-  FaBars,
-  FaTimes,
-  FaShoppingCart,
-} from "react-icons/fa";
 import Link from "next/link";
+import { FaSearch } from "react-icons/fa";
+import { FaShoppingBag } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 
-const Header = () => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
-
-  const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Our Menu", path: "/ourmenu" },
-    { name: "About Us", path: "/aboutus" },
-    { name: "Shop", path: "/shop" },
-    { name: "Our Chef", path: "/ourchef" },
-  ];
-
   return (
-    <header className="bg-black text-white">
-      <div className="flex justify-between items-center px-6 py-4 md:px-10">
-        <div className="font-bold text-xl">
-          <Link href="/">
-            <span className="text-white">Food</span>
-            <span className="text-[#FF9F0D]">tuck</span>
-          </Link>
-        </div>
-
-        <nav className="hidden md:flex space-x-5">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              href={item.path}
-              className="hover:text-[#FF9F0D] hover:underline transform transition duration-200 ease-in-out hover:scale-105 cursor-pointer"
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center space-x-4">
-          <div className="relative hidden md:block">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="pl-4 pr-10 py-2 rounded-full bg-black border border-[#FF9F0D] text-white focus:outline-none transition duration-200 ease-in-out focus:ring-2 focus:ring-[#FF9F0D]"
-            />
-            <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white cursor-pointer" />
-          </div>
-          <Link href="/shoppingcart">
-            <FaShoppingCart className="cursor-pointer hover:text-[#FF9F0D] transition duration-200 ease-in-out" />
-          </Link>
-          <Link href="/user">
-            <FaUser className="cursor-pointer hover:text-[#FF9F0D] transition duration-200 ease-in-out" />
-          </Link>
-          <button
-            onClick={toggleMenu}
-            className="md:hidden focus:outline-none transition duration-200 ease-in-out"
-          >
+    <nav className="flex flex-col items-center p-4 bg-black">
+      <div className="flex items-center justify-between w-full">
+        <span className="text-[#FF9F0D] font-bold text-[24px] flex-grow text-center">
+          Food<span className="text-white">tuck</span>
+        </span>
+        <div className="md:hidden ">
+          <button onClick={toggleMenu} aria-label="Toggle menu">
             {isOpen ? (
-              <FaTimes className="text-xl" />
+              <FaTimes className="text-white" />
             ) : (
-              <FaBars className="text-xl" />
+              <FaBars className="text-white" />
             )}
           </button>
         </div>
       </div>
 
-      <div
-        className={`md:hidden bg-black py-4 grid grid-cols-3 gap-4 place-items-center transition-all duration-300 ease-in-out transform ${isOpen ? "scale-y-100" : "scale-y-0 overflow-hidden"}`}
-      >
-        {navItems.map((item) => (
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex flex-row items-center justify-around w-full p-2 transition-all duration-300 ease-in-out">
+        <div className="flex items-center space-x-4">
           <Link
-            key={item.path}
-            href={item.path}
-            className="text-white hover:text-[#FF9F0D] transition duration-200 ease-in-out"
-            onClick={closeMenu}
+            href="/"
+            className="hover:text-[#FF9F0D] text-white hover:underline transform transition duration-100 hover:scale-105 cursor-pointer"
           >
-            {item.name}
+            Home
           </Link>
-        ))}
+
+          <Link
+            href="/ourmenu"
+            className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer"
+          >
+            Menu
+          </Link>
+
+          <Link
+            href="/blog"
+            className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer"
+          >
+            Blog
+          </Link>
+
+          <Link
+            href="/aboutus  "
+            className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer"
+          >
+            About
+          </Link>
+
+          <Link
+            href="/shop"
+            className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer"
+          >
+            Shop
+          </Link>
+
+          <Link
+            href="/FAQ"
+            className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer"
+          >
+            FAQ
+          </Link>
+        </div>
+
+        <div className="flex items-center mt-4 md:mt-0">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="pl-4 pr-10 py-2 rounded-full bg-black border border-[#FF9F0D] text-white focus:outline-none"
+            />
+            <Link href="/Error404">
+              <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white" />
+            </Link>
+          </div>
+          <Link href="/shoppingcart">
+            <FaShoppingBag className="ml-4 text-white hover:text-[#FF9F0D]" />
+          </Link>
+        </div>
+      </div>
+
+      {/* Mobile Navigation */}
+      <div
+        className={`md:hidden w-full text-center mt-3 grid grid-cols-3 transition-all duration-300 ease-in-out transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <Link href="/" className="block text-white py-2" onClick={toggleMenu}>
+          Home
+        </Link>
+
+        <Link
+          href="/ourmenu"
+          className="block text-white py-2"
+          onClick={toggleMenu}
+        >
+          Menu
+        </Link>
+
+        <Link
+          href="/aboutus"
+          className="block text-white py-2"
+          onClick={toggleMenu}
+        >
+          About
+        </Link>
+
+        <Link
+          href="/shop"
+          className="block text-white py-2"
+          onClick={toggleMenu}
+        >
+          Shop
+        </Link>
+
+        <Link
+          href="/blog"
+          className="block text-white py-2"
+          onClick={toggleMenu}
+        >
+          Blog
+        </Link>
+
         <Link
           href="/faq"
-          className="text-white hover:text-[#FF9F0D] transition duration-200 ease-in-out"
-          onClick={closeMenu}
+          className="block text-white py-2"
+          onClick={toggleMenu}
         >
           FAQ
         </Link>
       </div>
-    </header>
+    </nav>
   );
 };
 
-export default Header;
+export default Navbar;
