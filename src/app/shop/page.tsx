@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
-import Header from "@/components/Header";
-import SearchableProductList from "@/components/Searchbar";
+import { client } from "../../sanity/lib/client";
+import { urlFor } from "../../sanity/lib/image";
+import Header from "../../components/Header";
+import SearchableProductList from "../../components/Searchbar";
 import Link from "next/link";
 import Image from "next/image";
 import { MdKeyboardArrowRight } from "react-icons/md";

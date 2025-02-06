@@ -3,7 +3,7 @@ import { datablog } from '../../../Data/data'
 import Image from 'next/image'
 import { FaInstagram  } from "react-icons/fa6";
 import Link from 'next/link';
-import Header from "@/components/Header";
+import Header from "../../components/Header";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { PiCalendarDotsDuotone } from "react-icons/pi";
 import { TiMessages } from "react-icons/ti";

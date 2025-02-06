@@ -1,17 +1,12 @@
-"use client";
+"use client"
 import { useState } from "react";
 import Link from "next/link";
-import { FaSearch } from "react-icons/fa";
-import { FaShoppingBag } from "react-icons/fa";
-import { FaBars } from "react-icons/fa";
-import { FaTimes } from "react-icons/fa";
+import { FaSearch, FaShoppingBag, FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <nav className="flex flex-col items-center p-4 bg-black">
@@ -21,11 +16,7 @@ const Navbar = () => {
         </span>
         <div className="md:hidden">
           <button onClick={toggleMenu} aria-label="Toggle menu">
-            {isOpen ? (
-              <FaTimes className="text-white" />
-            ) : (
-              <FaBars className="text-white" />
-            )}
+            {isOpen ? <FaTimes className="text-white" /> : <FaBars className="text-white" />}
           </button>
         </div>
       </div>
@@ -33,45 +24,22 @@ const Navbar = () => {
       {/* Desktop Navigation */}
       <div className="hidden md:flex flex-row items-center justify-around w-full p-2 transition-all duration-300 ease-in-out">
         <div className="flex items-center space-x-4">
-          <Link
-            href="/"
-            className="hover:text-[#FF9F0D] text-white hover:underline transform transition duration-100 hover:scale-105 cursor-pointer"
-          >
+          <Link href="/" className="hover:text-[#FF9F0D] text-white hover:underline transform transition duration-100 hover:scale-105 cursor-pointer">
             Home
           </Link>
-
-          <Link
-            href="/ourmenu"
-            className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer"
-          >
+          <Link href="/ourmenu" className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer">
             Menu
           </Link>
-
-          <Link
-            href="/blog"
-            className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer"
-          >
+          <Link href="/blog" className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer">
             Blog
           </Link>
-
-          <Link
-            href="/aboutus"
-            className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer"
-          >
+          <Link href="/aboutus" className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer">
             About
           </Link>
-
-          <Link
-            href="/shop"
-            className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer"
-          >
+          <Link href="/shop" className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer">
             Shop
           </Link>
-
-          <Link
-            href="/faq"
-            className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer"
-          >
+          <Link href="/faq" className="hover:text-[#FF9F0D] text-white transform transition duration-100 hover:scale-105 cursor-pointer">
             FAQ
           </Link>
         </div>
@@ -95,53 +63,14 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       <div
-        className={`md:hidden w-full text-center mt-3 grid grid-cols-3 transition-all duration-300 ease-in-out transform ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        } z-50`} // Added z-index to ensure it's above other elements
+        className={`md:hidden w-full text-center mt-3 grid grid-cols-3 transition-all duration-300 ease-in-out transform ${isOpen ? "translate-x-0" : "translate-x-full"} z-50`}
       >
-        <Link href="/" className="block text-white py-2" onClick={toggleMenu}>
-          Home
-        </Link>
-
-        <Link
-          href="/ourmenu"
-          className="block text-white py-2"
-          onClick={toggleMenu}
-        >
-          Menu
-        </Link>
-
-        <Link
-          href="/aboutus"
-          className="block text-white py-2"
-          onClick={toggleMenu}
-        >
-          About
-        </Link>
-
-        <Link
-          href="/shop"
-          className="block text-white py-2"
-          onClick={toggleMenu}
-        >
-          Shop
-        </Link>
-
-        <Link
-          href="/blog"
-          className="block text-white py-2"
-          onClick={toggleMenu}
-        >
-          Blog
-        </Link>
-
-        <Link
-          href="/faq"
-          className="block text-white py-2"
-          onClick={toggleMenu}
-        >
-          FAQ
-        </Link>
+        <Link href="/" className="block text-white py-2 hover:text-[#FF9F0D]" onClick={toggleMenu}>Home</Link>
+        <Link href="/ourmenu" className="block text-white py-2 hover:text-[#FF9F0D]" onClick={toggleMenu}>Menu</Link>
+        <Link href="/aboutus" className="block text-white py-2 hover:text-[#FF9F0D]" onClick={toggleMenu}>About</Link>
+        <Link href="/shop" className="block text-white py-2 hover:text-[#FF9F0D]" onClick={toggleMenu}>Shop</Link>
+        <Link href="/blog" className="block text-white py-2 hover:text-[#FF9F0D]" onClick={toggleMenu}>Blog</Link>
+        <Link href="/faq" className="block text-white py-2 hover:text-[#FF9F0D]" onClick={toggleMenu}>FAQ</Link>
       </div>
     </nav>
   );

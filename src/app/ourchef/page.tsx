@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { client } from '@/sanity/lib/client';
-import { urlFor } from '@/sanity/lib/image';
-import Header from '@/components/Header';
+import { client } from '../../sanity/lib/client';
+import { urlFor } from '../../sanity/lib/image';
+import Header from '../../components/Header';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 const page = async () => {
   const datas = await client.fetch(` *[_type == "chef"]{

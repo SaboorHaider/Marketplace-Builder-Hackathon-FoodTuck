@@ -12,12 +12,12 @@ import { IoIosGitCompare, IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
-import RelatedImages from "@/components/Relimg";
-import Similar from "@/components/Similarpro";
-import AddToCart from "@/components/Cart";
-import Header from "@/components/Header";
+import { client } from "../../../sanity/lib/client";
+import { urlFor } from "../../../sanity/lib/image";
+import RelatedImages from "../../../components/Relimg";
+import Similar from "../../../components/Similarpro";
+import AddToCart from "../../../components/Cart";
+import Header from "../../../components/Header";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
 const WishlistButton = () => {

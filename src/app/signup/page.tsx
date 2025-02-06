@@ -1,7 +1,7 @@
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
-import Header from "@/components/Header";
+import Header from "../../components/Header";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
 const SignUp = () => {

@@ -1,4 +1,4 @@
-
+"use client"
 import { useState } from "react";
 import { FaSearch, FaUser, FaBars, FaTimes, FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";

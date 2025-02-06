@@ -4,8 +4,8 @@ import React from 'react'
 import Image from 'next/image'
 import { IoIosStar } from "react-icons/io";
 import { useState, useEffect } from "react";
-import Header from '@/components/Header';
-import { urlFor } from '@/sanity/lib/image';
+import Header from '../../components/Header';
+import { urlFor } from '../../sanity/lib/image';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { FaArrowRightToBracket } from 'react-icons/fa6';
 interface CartItem {

@@ -1,8 +1,8 @@
 "use client";
-import Header from "@/components/Header";
+import Header from "../../components/Header";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor } from "../../sanity/lib/image";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import Link from "next/link";
 

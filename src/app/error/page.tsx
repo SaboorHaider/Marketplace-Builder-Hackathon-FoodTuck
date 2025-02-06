@@ -5,8 +5,6 @@ import { MdKeyboardArrowRight } from 'react-icons/md';
 import Header from '../../components/Header';
 import { TiPlus } from "react-icons/ti";
 
-import Footer from '../../components/Footer';
-
 
 
 const Faq = () => {
@@ -91,10 +89,6 @@ const Faq = () => {
           </div>
         ))}
       </div>
-
-      <footer>
-        <Footer/>
-      </footer>
     </div>
   );
 };

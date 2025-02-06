@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Header from "@/components/Header";
+import Header from "../../components/Header";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { FaPlayCircle } from "react-icons/fa";
 import { LiaQuoteRightSolid } from "react-icons/lia";
