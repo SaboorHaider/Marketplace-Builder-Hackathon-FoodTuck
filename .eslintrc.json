@@ -1,10 +1,6 @@
 {
-<<<<<<< HEAD
-  "extends": ["next/core-web-vitals", "next/typescript"]
-=======
   "extends": ["next/core-web-vitals", "next/typescript"],
    "rules": {
     "@typescript-eslint/no-explicit-any" : "off"
   }
->>>>>>> e9f6b11 (Update Files)
 }
