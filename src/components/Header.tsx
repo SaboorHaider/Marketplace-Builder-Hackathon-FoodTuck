@@ -56,6 +56,9 @@ const Header = () => {
             {isOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
           </button>
         </div>
+        <Link href="/ourmenu">
+            <FaUser className="cursor-pointer hover:text-[#FF9F0D]" />
+          </Link>
       </div>
 
       {isOpen && (
