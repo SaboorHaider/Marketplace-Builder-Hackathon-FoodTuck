@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 
+<<<<<<< HEAD
 
 const config: Config = {
     darkMode: ["class"],
@@ -17,6 +18,29 @@ const config: Config = {
   			]
   		},
   		colors: {
+=======
+const config: Config = {
+    darkMode: ["class"],
+	daisyui: {
+		themes: ["autumn"],}
+		,
+    content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+  	extend: {
+		fontFamily: {
+			flower: [
+			'Send Flowers'
+		] 
+		  },
+  		colors: {
+			blackkk: '#0D0D0DF2',
+			whitetext: '#ffffff',
+			bordercoloryello: '#FF9F0D',
+>>>>>>> e9f6b11 (Update Files)
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -62,6 +86,7 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
+<<<<<<< HEAD
   		},
   		keyframes: {
   			'accordion-down': {
@@ -88,5 +113,11 @@ const config: Config = {
   	}
   },
   plugins: [require("tailwindcss-animate")],
+=======
+  		}
+  	}
+  },
+  plugins: [require("tailwindcss-animate"),require("daisyui")],
+>>>>>>> e9f6b11 (Update Files)
 };
 export default config;
