@@ -104,7 +104,7 @@ const Navbar = () => {
         </Link>
 
         <Link
-          href="/menu"
+          href="/ourmenu"
           className="block text-white py-2"
           onClick={toggleMenu}
         >
@@ -112,7 +112,7 @@ const Navbar = () => {
         </Link>
 
         <Link
-          href="/about"
+          href="/aboutus"
           className="block text-white py-2"
           onClick={toggleMenu}
         >
@@ -136,7 +136,7 @@ const Navbar = () => {
         </Link>
 
         <Link
-          href="/FAQ"
+          href="/faq"
           className="block text-white py-2"
           onClick={toggleMenu}
         >

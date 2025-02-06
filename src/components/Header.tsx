@@ -2,10 +2,10 @@
 import { useState } from "react";
 import {
   FaSearch,
-  FaShoppingCart,
   FaUser,
   FaBars,
   FaTimes,
+  FaShoppingCart,
 } from "react-icons/fa";
 import Link from "next/link";
 
@@ -20,12 +20,17 @@ const Header = () => {
     setIsOpen(false);
   };
 
-  const navItems = ["Home", "Menu", "About Us", "Shop", "Our Chef"];
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "Our Menu", path: "/ourmenu" },
+    { name: "About Us", path: "/aboutus" },
+    { name: "Shop", path: "/shop" },
+    { name: "Our Chef", path: "/ourchef" },
+  ];
 
   return (
     <header className="bg-black text-white">
       <div className="flex justify-between items-center px-6 py-4 md:px-10">
-        {/* Logo */}
         <div className="font-bold text-xl">
           <Link href="/">
             <span className="text-white">Food</span>
@@ -33,20 +38,18 @@ const Header = () => {
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-5">
           {navItems.map((item) => (
             <Link
-              key={item}
-              href={`/${item.toLowerCase().replace(/\s+/g, "")}`} // Converts "Home" to "/home"
+              key={item.path}
+              href={item.path}
               className="hover:text-[#FF9F0D] hover:underline transform transition duration-200 ease-in-out hover:scale-105 cursor-pointer"
             >
-              {item}
+              {item.name}
             </Link>
           ))}
         </nav>
 
-        {/* Icons & Mobile Menu Button */}
         <div className="flex items-center space-x-4">
           <div className="relative hidden md:block">
             <input
@@ -75,18 +78,17 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className={`md:hidden bg-black py-4 grid grid-cols-3 gap-4 place-items-center transition-all duration-300 ease-in-out transform ${isOpen ? "scale-y-100" : "scale-y-0 overflow-hidden"}`}
       >
         {navItems.map((item) => (
           <Link
-            key={item}
-            href={`/${item.toLowerCase().replace(/\s+/g, "")}`}
+            key={item.path}
+            href={item.path}
             className="text-white hover:text-[#FF9F0D] transition duration-200 ease-in-out"
             onClick={closeMenu}
           >
-            {item}
+            {item.name}
           </Link>
         ))}
         <Link
