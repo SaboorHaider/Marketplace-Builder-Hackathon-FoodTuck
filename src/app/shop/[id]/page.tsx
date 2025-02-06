@@ -80,7 +80,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             <div className="flex justify-center items-center mt-1">
               <Link href="/" className="hover:text-[#FF9F0D]">Home</Link>
               <MdKeyboardArrowRight />
-              <Link href="/Error404" className="text-[#FF9F0D]">Shop Details</Link>
+              <Link href="/Error404" className="text-[#FF9F0D]">Product Details</Link>
             </div>
           </div>
         </div>

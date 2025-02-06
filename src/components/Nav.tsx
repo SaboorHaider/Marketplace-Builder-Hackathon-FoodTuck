@@ -51,9 +51,7 @@ const Navbar = () => {
               placeholder="Search..."
               className="pl-4 pr-10 py-2 rounded-full bg-black border border-[#FF9F0D] text-white focus:outline-none"
             />
-            <Link href="/search">
               <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white" />
-            </Link>
           </div>
           <Link href="/shoppingcart">
             <FaShoppingBag className="ml-4 text-white hover:text-[#FF9F0D]" />

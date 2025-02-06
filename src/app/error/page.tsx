@@ -50,7 +50,7 @@ const Faq = () => {
           />
 
           <div className="absolute inset-0 lg:m-[70px] justify-center  text-center items-center gap-[15px] sm:gap-[20px] lg:gap-[30px] px-4 text-white">
-            <h2 className="text-center text-3xl font-bold ">FAQ</h2>
+            <h2 className="text-center text-3xl font-bold ">Error</h2>
 
             <div className=" text-center justify-center items-center flex mt-1 ">
               <p>
@@ -61,7 +61,7 @@ const Faq = () => {
               <MdKeyboardArrowRight />
 
               <p className="text-[#FF9F0D] cursor-pointer">
-                <Link href="/Error404">Faq</Link>
+                <Link href="/Error404">Error</Link>
               </p>
             </div>
           </div>
